@@ -53,7 +53,7 @@ An Example Fruit Image if Stored as a mongo object:
 ```
 
 
-## ![File containing my current schemas](/db.js?raw=true "Database")(db.js) 
+## ![File containing my current schemas](db.js "Database")(db.js) 
 
 
 ## Wireframes
