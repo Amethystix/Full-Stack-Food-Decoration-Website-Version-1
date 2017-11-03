@@ -2,72 +2,83 @@ The content below is an example project proposal / requirements document. Replac
 
 (___TODO__: your project name_)
 
-# Shoppy Shoperson 
+# FoodFace Industries
 
 ## Overview
 
 (___TODO__: a brief one or two paragraph, high-level description of your project_)
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+FoodFace Industries is a revolutionary (well, not really) website where you can do the kind of thing you've always dreamed of.  That's right; I'm talking a full on user interactive fruit experience.  By interactive, I mean making beautiful fruit with customized features and faces.
 
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+This website will consist of user login to create their own fruits with a p5.js "dressup game" type interface.  The user can then export their fruit to the gallery, where anyone can go and view different fruits that have been created by themselves and other users.
 
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
 
-The application will store Users, Lists and Items
+The application will store users, their image data (may store as JSON data to be interpreted, may store as image file), and all user's image data in one big global gallery.
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(___TODO__: sample documents_)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "laurentheawesome",
   hash: // a password hash,
-  lists: // an array of references to List documents
+  fruits: //a list of fruits made from the mongo schema
 }
 ```
 
-An Example List with Embedded Items:
+An Example Accessory Object (they go on fruits)
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+  xPos: //number representing x coordinate of the accessory on the fruit image
+  yPos: //number representing y coordinate of the accessory on the fruit image
+
+  name: //string representing the name of the accessory
+
+  xSize: //number representing the width of the accessory
+  ySize: //number representing the height of the accessory
+}
+```
+An Example Fruit Image if Stored as a mongo object:
+
+```javascript
+{
+  user: //reference to a user object who created the fruit
+  fruit-type: //type of fruit in the user's image
+  accessories: //list of accessory objects
 }
 ```
 
 
-## [Link to Commented First Draft Schema](db.js) 
+## ![File containing my current schemas](/db.js?raw=true "Database")(db.js) 
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+/home - home page when logged out, and logged in
 
-/list/create - page for creating a new shopping list
+![logged out home](documentation/loggedout_home.jpg)
+![logged in home](documentation/loggedinhomepage.jpg)
 
-![list create](documentation/list-create.png)
+/about - page about the site with testimonials
 
-/list - page for showing all shopping lists
+![about](documentation/about.jpg)
 
-![list](documentation/list.png)
+/create-a-fruit - page where the user can play the fruit face dressup game
 
-/list/slug - page for showing specific shopping list
+![create a fruit](documentation/createafruit.jpg)
 
-![list](documentation/list-slug.png)
+/gallery/slug - page to display the user's own personal gallery, same layout as
+/gallery, which displays the global gallery, so both have the same wireframe
+
+![gallery](documentation/gallery.jpg)
+
+/login - page where the user logs in
+
+![login](documentation/login.jpg)
 
 ## Site map
 
