@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const public = path.resolve(__dirname, 'public');
+const bodyParser =  require('body-parser');
 app.use(express.static(public));
 app.use(bodyParser.urlencoded({ extended: false}));
 //Set view engine
