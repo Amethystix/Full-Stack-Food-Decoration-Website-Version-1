@@ -1,12 +1,24 @@
 
-<div class = "container"
-<div class = "container" style = "padding-top: 20px;">
+<div class = "container">
+	<div class = "well testimonial" style="text-align: center">
+		<h1>Enter your own testimonial</h1>
+		<form method="POST" action="/newtestimonial">
+			Post Title:<input id = "testimonial-title" type = "text" name="title">
+			Your Name:<input id="testimonial-name" type="text" name="name"></br></br>
+			Your Experience with us:<input id="testimonial-body" type ="text" name="contents"></br>
+			<input type="submit">
+		</form>
+	</div>
+</div>
+<div class = "well testimonial container" style = "padding-top: 20px;">
 	<h2>User Testimonials</h2>
 	{{#each testimonial}}
-	<div class="well testimonial">
+	<div class="well testimonial" style = "background-color: #FFFFFF;">
 		<h1><i>{{title}}</i></h1>
-		<p>{{message}}</p>
-		<p style = "font-size: 10px; text-align: right;">- {{name}}</p>
+		<p>{{contents}}</p>
+		<div style="float:left;"> <span style = "font-size: 10px; text-align: left;">Posted on {{date}}</span></div>
+		<div style="float:right;"><span style = "font-size: 13px; text-align: right;">- {{name}}</span></div>
+	</br>
 	</div>
 	{{/each}}
 </div>

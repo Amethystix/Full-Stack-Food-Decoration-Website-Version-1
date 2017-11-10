@@ -50,9 +50,10 @@ app.get('/testimonials', (req, res)=>{
 });
 app.post('/newtestimonial', (req, res)=>{
 	const newTest = new Testimonial({
+		title: req.body.title,
 		name: req.body.name,
 		contents: req.body.contents,
-		date: new Date()
+		date: new Date().toString()
 	});
 	newTest.save((err)=>{
 		if(err){
@@ -74,4 +75,4 @@ app.get('/createafruit', (req,res)=>{
 	res.render('register');
 }); */
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
