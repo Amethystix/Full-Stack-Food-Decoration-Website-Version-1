@@ -1,4 +1,19 @@
 .head{
 	background-color: #C0FFEE;
-	color: #FFFFFF;
+	color: #333333;
+	height: 300px;
+}
+.text{
+	text-align: center;
+	margin: auto;
+}
+.home{
+	text-align: center;
+}
+body{
+	color:#333333;
+}
+.testimonial{
+	background-color: #EBFFFF;
+	color: #333333;
 }
