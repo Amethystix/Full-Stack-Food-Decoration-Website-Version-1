@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+require('./db');
+const Testimonial = mongoose.model("Testimonial");
 const path = require('path');
 const public = path.resolve(__dirname, 'public');
 const bodyParser =  require('body-parser');
@@ -35,6 +37,29 @@ app.get('/myGallery', (req,res)=>{
 app.get('/about', (req, res)=>{
 	//Displays the about page with "user testimonials"
 	res.render('about');
+});
+app.get('/testimonials', (req, res)=>{
+	Testimonial.find((err, testimonials)=>{
+		if(err){
+			console.log(err.message);
+		}
+		else{
+			res.render('testimonials', {testimonial: testimonials})
+		}
+	});
+});
+app.post('/newtestimonial', (req, res)=>{
+	const newTest = new Testimonial({
+		name: req.body.name,
+		contents: req.body.contents,
+		date: new Date()
+	});
+	newTest.save((err)=>{
+		if(err){
+			console.log(err.message);
+		}
+		res.redirect('/testimonials');
+	});
 });
 app.get('/createafruit', (req,res)=>{
 	//If the use is logged in, display the page
