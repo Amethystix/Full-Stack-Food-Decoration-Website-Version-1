@@ -4,10 +4,43 @@ const mongoose = require('mongoose');
 require('./db');
 const Testimonial = mongoose.model("Testimonial");
 const Food = mongoose.model("Food");
+const passport = require('passport');
+const jquery = require('jquery');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+
+const p5 = [];
+p5.push("p5.min.js");
+p5.push("p5.dom.js");
+p5.push("p5.sound.js");
+p5.push("sketch.js");
+p5.push("buttonListeners.js");
+
+passport.use(new GoogleStrategy({
+	clientID: "259868719807-b78pc296uksbcf4so63k8dsvfbknt92t.apps.googleusercontent.com",
+	clientSecret: "g-IO59l_ajMvlZyHDvi-d1c_",
+	callbackURL: "/auth/google/callback"
+},
+	function(accessToken, refreshToken, profile, done) {
+		User.findOrCreate({ googleId: profile.id }, function (err, user) {
+			return done(err, user);
+		});
+	}
+));
+passport.serializeUser(function(user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 const path = require('path');
 const public = path.resolve(__dirname, 'public');
 const bodyParser =  require('body-parser');
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(public));
 app.use(bodyParser.urlencoded({ extended: false}));
 //Set view engine
@@ -19,7 +52,13 @@ app.get('/', (req, res)=>{
 });
 app.get('/home', (req, res)=>{
 	//display home page
-	res.render('home');	
+	// if(req.user){
+	// 	res.render('home', {user: req.user.})
+	// }
+	// else{
+	// 	res.render('home', {not: "no"});	
+	// }
+	res.render('home');
 });
 app.get('/login', (req, res)=>{
 	//Login page displayed if user is logged out, else redirect to the home page
@@ -78,7 +117,23 @@ app.get('/createafruit', (req,res)=>{
 
 	//If the user is not logged in, instead redirect them to a login page
 	
-	res.render('createafruit', {p5: ["p5.dom.js", "p5.min.js", "p5.sound.js", "sketch.js"]})
+	res.render('createafruit', {p5: p5})
+});
+app.post('/createafruit', (req, res)=>{
+	console.log(req.body);
+	const f = new Food({
+		foodType: req.body.type,
+		accessories: req.body.accessories, 
+	});
+	f.save(function(err){
+		if(err){
+			console.log("Error has occured in saving");
+		}
+		else{
+			console.log("Your food has been saved to the gallery!");
+		}
+	});
+	res.redirect('/createafruit');
 });
 /*app.get('/register', (req, res)=>{
 	//Registration page; might not exist if I only do logging in with Google

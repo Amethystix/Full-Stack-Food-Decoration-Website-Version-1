@@ -1,3 +1,4 @@
+
 let clicked = false;
 
 let thumbnail;
@@ -9,64 +10,60 @@ const buttons = [];
 
 let saveButton;
 let toggleFoodButton;
+var myFood;
 
 function preload(){
-	saveButton = loadImage("/img/game/saveButton");
+	saveButton = loadImage("/img/game/saveButton.png");
 	toggleFoodButton = loadImage('/img/game/foodTypeButton.png');
 
-	appleImg = loadImage("/img/game/Apple.png");
-	orangeImg = loadImage("/img/game/Orange.png");
-	bananaImg = loadImage("/img/game/Banana.png");
+	appleImg = loadImage("/img/game/apple.png");
+	orangeImg = loadImage("/img/game/orange.png");
+	bananaImg = loadImage("/img/game/banana.png");
 }
 function setup(){
 	const myCanvas = createCanvas(500,500);
-	const myFood = new MyFood();
-	buttons.push(new Button("togglefood", toggleFoodButton, 100, 75));
-	buttons.push(new Button("save", saveButton, 400, 75));
+	myCanvas.parent("sketchHolder");
+
+	myFood = new MyFood();
+	buttons.push(new Button("togglefood", toggleFoodButton, 65, 30));
 	imageMode(CENTER);
 }
 function draw(){
-
+	myFood.display();
 	buttons.forEach( function(x){
 		if(x.display()){
-			if(x.name === "save"){
-				const f = new Food({
-					type: myFood.type,
-					accessories: myFood.addons
-				});
-				f.save(function(err){
-					if(err){
-						alert("Error has occured in saving");
-					}
-					else{
-						alert("Your food has been saved to the gallery!");
-					}
-				})
-			}
-			else if(x.name === "togglefood"){
+			if(x.name === "togglefood"){
 				myFood.changeFood();
 			}
 		}
 	});
-	myFood.display();
 	clicked = false;
 }
 function MyFood(info){
 	this.display = function(){
-		image(this.type + "img", 250, 250);
+		if(this.type === "apple"){
+			image(appleImg, 250, 250);
+		}
+		else if(this.type === "orange"){
+			image(orangeImg, 250, 250);
+		}
+		else if(this.type === "banana"){
+			image(bananaImg, 250, 250);
+		}
 		for(let i = 0; i < this.addons.length; i++){
 			image(this.addons[i].image, this.addons[i].xPos, this.addons[i].yPos);
 		}
 	}
 	this.changeFood = function(){
 		this.dictionaryIterator+1 === foodDictionary.length ? this.dictionaryIterator=0 : this.dictionaryIterator+=1;
-		this.type = foodDictionary[dictionaryIterator]; 
+		this.type = foodDictionary[this.dictionaryIterator]; 
 	}
 	if(!info){
 		this.addons = [];
 		this.name = "";
 		this.dictionaryIterator = 0;
 		this.type = foodDictionary[0];
+		this.image = this.type + "Img";
 		this.bg = "";
 		this.creator = "";
 		this.description = "";

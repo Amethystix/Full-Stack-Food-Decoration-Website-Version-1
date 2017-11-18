@@ -24,7 +24,7 @@ const Testimonial = new mongoose.Schema({
 	date: String //Date posted
 });
 mongoose.model('Accessory', Accessory);
-mongoose.model('Fruit', Fruit);
+mongoose.model('Food', Food);
 mongoose.model('Testimonial', Testimonial);
 
 let dbconf;
