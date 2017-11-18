@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 require('./db');
 const Testimonial = mongoose.model("Testimonial");
+const Food = mongoose.model("Food");
+
 const path = require('path');
 const public = path.resolve(__dirname, 'public');
 const bodyParser =  require('body-parser');
@@ -26,7 +28,14 @@ app.get('/login', (req, res)=>{
 app.get('/gallery', (req, res)=>{
 	//Displays the gallery containing all of the fruit pics.
 	//Can be viewed by users not logged in
-	res.render('gallery');
+	Food.find((err, food)=>{
+		if(err){
+			console.log(err.message);
+		}
+		else{
+			res.render('gallery', {food: food});
+		}
+	});
 });
 app.get('/myGallery', (req,res)=>{
 	//Displays the user's personal gallery if logged in
@@ -68,7 +77,8 @@ app.get('/createafruit', (req,res)=>{
 	//the user to decorate a fruit.
 
 	//If the user is not logged in, instead redirect them to a login page
-	res.render('createafruit')
+	
+	res.render('createafruit', {p5: ["p5.dom.js", "p5.min.js", "p5.sound.js", "sketch.js"]})
 });
 /*app.get('/register', (req, res)=>{
 	//Registration page; might not exist if I only do logging in with Google

@@ -11,10 +11,11 @@ const Accessory = new mongoose.Schema({
   xSize: Number, //number representing the width of the accessory
   ySize: Number //number representing the height of the accessory
 });
-const Fruit = new mongoose.Schema({
+const Food = new mongoose.Schema({
   user: String, //reference to a user object who created the fruit
-  fruitType: String, //type of fruit in the user's image
-  accessories: [Accessory] //list of accessory objects
+  foodType: String, //type of fruit in the user's image
+  accessories: [Accessory], //list of accessory objects
+  thumbnail: String //File name of the thumbnail of the user's created fruit (MAYBE)
 });
 const Testimonial = new mongoose.Schema({
   title: String, //Title of the testimonial

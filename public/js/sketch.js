@@ -20,9 +20,6 @@ function preload(){
 }
 function setup(){
 	const myCanvas = createCanvas(500,500);
-	const sketchhold = document.querySelector('#sketchHolder');
-	sketchhold.appendChild(myCanvas);
-
 	const myFood = new MyFood();
 	buttons.push(new Button("togglefood", toggleFoodButton, 100, 75));
 	buttons.push(new Button("save", saveButton, 400, 75));

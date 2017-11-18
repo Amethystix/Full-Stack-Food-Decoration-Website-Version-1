@@ -39,3 +39,13 @@ footer{
 .main{
 	width: 100%;
 }
+.middle-container{
+	background-color: #EBFFFF;
+}
+.right{
+	float: right;
+}
+#sketchHolder{
+	text-align: center;
+	margin: auto;
+}
