@@ -5,7 +5,6 @@ require('./db');
 const Testimonial = mongoose.model("Testimonial");
 const Food = mongoose.model("Food");
 const passport = require('passport');
-const jquery = require('jquery');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 const p5 = [];
