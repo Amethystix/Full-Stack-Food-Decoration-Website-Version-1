@@ -8,7 +8,7 @@ $(document).ready(function() {
 			url: "/createafruit",
 			data: {
 				type: myFood.type,
-				accessories: myFood.addons
+				accessories: JSON.stringify(stringAccessories)
 			},
 			success: function(result) {
 				alert("Saved to the gallery!");

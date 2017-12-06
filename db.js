@@ -8,9 +8,7 @@ const Accessory = new mongoose.Schema({
   yPos: Number, //number representing y coordinate of the accessory on the fruit image
 
   name: String, //string representing the name of the accessory
-
-  xSize: Number, //number representing the width of the accessory
-  ySize: Number //number representing the height of the accessory
+  type: String
 });
 const Food = new mongoose.Schema({
   user: String, //reference to a user object who created the fruit

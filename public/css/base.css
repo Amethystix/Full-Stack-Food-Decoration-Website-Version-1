@@ -53,15 +53,17 @@ footer{
 	margin: auto;
 }
 .food-holder{
-	height: 200px;
-	width: 200px;
+	height: 275px;
+	width: 275px;
 	float: left;
 	text-align: center;
 }
 .food{
-	height: 100px;
-	width: 100px;
+	margin: auto;
+	height: 250px;
+	width: 250px;
 	background-size: cover;
+	position: relative;
 }
 #SaveButton{
 
@@ -76,6 +78,15 @@ footer{
 	width: 200px;
 }
 .accessory-holder{
+	position: absolute;
+}
+.eye{
 	background-size: cover;
-	position: relative;
+	width: 25px;
+	width: 25px;
+}
+.mouth{
+	background-size: cover;
+	width: 50px;
+	height: 25px;
 }

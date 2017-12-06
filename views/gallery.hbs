@@ -3,8 +3,11 @@
 	<div id="gallery-holder">
 		{{#each food}}
 		<div class = "food-holder">
-			<div class = "food" style = "background-image: url(/img/game/{{foodType}}.png)">
-			</div>
+			<div class = "food" style = "background-image: url(/img/game/{{foodType}}.png)"> 
+			{{#each accessories}}
+				<img class = "accessory-holder {{type}}" style = "left: {{xPos}}px; top: {{yPos}}px;" src="{{name}}">
+			{{/each}}
+		</div>
 		</div>
 		{{/each}}
 	</div> 

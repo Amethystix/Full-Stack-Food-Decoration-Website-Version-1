@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 require('./db');
 const Testimonial = mongoose.model("Testimonial");
+const Accessory = mongoose.model("Accessory");
 const Food = mongoose.model("Food");
 const User = mongoose.model("User");
 const passport = require('passport');
@@ -133,11 +134,36 @@ app.get('/myGallery', (req,res)=>{
 	//Displays the user's personal gallery if logged in
 	//Otherwise, displays a login page and tells the user they cannot access this until they log in
 	if(req.user){
-		res.render("myGallery", {user: req.user, food: req.user.images, message: req.displayMessage});
+		res.render("myGallery", {user: req.user, food: req.user.images, message: req.displayMessage, myGal: "yes"});
 	}
 	else{
 		res.redirect('/login');
 	}
+});
+//Route handler to delete an entry
+app.post('/myGallery', (req, res)=>{
+	if(req.body.id){
+		console.log(req.body.id);
+		console.log(req.user.images);
+		req.user.images.id(req.body.id).remove();
+		req.user.save(function(err){
+			if(err){
+				console.log("Error in saving user object");
+			}
+			else{
+				console.log("Saved successfully");
+			}
+		});
+		Food.remove({_id: req.body.id}, function(err){
+			if(err){
+				console.log("Error in removing from collection");
+			}
+			else{
+				console.log("Successfully removed entry");
+			}
+		});
+	}
+	res.redirect('/myGallery');
 });
 app.get('/about', (req, res)=>{
 	//Displays the about page with "user testimonials"
@@ -191,10 +217,23 @@ app.get('/createafruit', (req,res)=>{
 	}
 });
 app.post('/createafruit', (req, res)=>{
-	console.log(req.body);
+	let newAcc = [];
+	if(req.body.accessories){
+		const accs = JSON.parse(req.body.accessories);
+		for(let i = 0; i < accs.length; i++){
+			const a = new Accessory({
+				type: accs[i].type,
+				name: `/img/game/${accs[i].type}s/${accs[i].type}${accs[i].num}.png`,
+				xPos: (accs[i].x)/2,
+				yPos: (accs[i].y)/2
+			});
+			newAcc.push(a);
+			console.log(a);
+		}
+	}
 	const f = new Food({
 		foodType: req.body.type,
-		accessories: req.body.accessories, 
+		accessories: newAcc, 
 		user: req.user.displayName
 	});
 	f.save(function(err){
