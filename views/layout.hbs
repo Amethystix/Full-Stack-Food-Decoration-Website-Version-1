@@ -4,9 +4,13 @@
 		<meta charset="utf-8">
    		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src = "js/jquery-3.2.1.min.js">
-       <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+      <script src = "js/jquery-3.2.1.min.js"></script>
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <script>
+        function logOutAlert(){
+          alert("You've been logged out!");
+        }
+      </script>
       {{#each p5 as |p|}}
         <script src = "js/{{p}}"></script>
       {{/each}}
@@ -29,11 +33,19 @@
           </button>
           <a class="navbar-brand" href="/">Home</a>
           <a class="navbar-brand" href="/gallery">Gallery</a>
+          {{#if user}}
           <a class="navbar-brand" href="/createafruit">Create</a>
+          {{/if}}
           <a class="navbar-brand" href="/testimonials">Testimonials</a>
         </div>
         <div class = "bcontainer right">
-          <a class = "navbar-brand" href="/login">Log in</a>
+          {{#if user}}
+            <a class = "navbar-brand" href="/mygallery">My Gallery</a>
+            <span class = "navbar-brand" href="#">Hi, {{user.displayName}}</span>
+            <a class = "navbar-brand" href="/logout" onclick="logOutAlert();">Log out</a>
+          {{else}}
+            <a class = "navbar-brand" href="/login">Log in</a>
+          {{/if}}
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         </div><!--/.navbar-collapse -->
@@ -41,7 +53,9 @@
     </nav>
 		<div class = "jumbotron head">
 			<h1>FoodFace Industries</h1>
-			<h3>Where dreams become reality</h3>
+      {{#if message}}
+			 <h3>{{message}}</h3>
+      {{/if}}
 		</div>
 		<div class = "container main">
 		{{{body}}}

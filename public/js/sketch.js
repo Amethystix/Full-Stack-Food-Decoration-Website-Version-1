@@ -6,6 +6,9 @@ let appleImg;
 let orangeImg;
 let bananaImg; 
 
+let eyes = [];
+let mouths = [];
+
 const buttons = [];
 
 let saveButton;
@@ -19,6 +22,11 @@ function preload(){
 	appleImg = loadImage("/img/game/apple.png");
 	orangeImg = loadImage("/img/game/orange.png");
 	bananaImg = loadImage("/img/game/banana.png");
+
+	for(let i = 1; i <=8; i++){
+		eyes.push(loadImage("/img/game/eyes/eye" + i + ".png"));
+		mouths.push(loadImage("/img/game/mouths/mouth" + i + ".png"));
+	}
 }
 function setup(){
 	const myCanvas = createCanvas(500,500);
@@ -26,7 +34,6 @@ function setup(){
 
 	myFood = new MyFood();
 	buttons.push(new Button("togglefood", toggleFoodButton, 65, 30));
-	imageMode(CENTER);
 }
 function draw(){
 	myFood.display();
@@ -42,13 +49,13 @@ function draw(){
 function MyFood(info){
 	this.display = function(){
 		if(this.type === "apple"){
-			image(appleImg, 250, 250);
+			image(appleImg, 0,0);
 		}
 		else if(this.type === "orange"){
-			image(orangeImg, 250, 250);
+			image(orangeImg, 0,0);
 		}
 		else if(this.type === "banana"){
-			image(bananaImg, 250, 250);
+			image(bananaImg, 0,0);
 		}
 		for(let i = 0; i < this.addons.length; i++){
 			image(this.addons[i].image, this.addons[i].xPos, this.addons[i].yPos);
@@ -77,8 +84,40 @@ function MyFood(info){
 		this.description = "";
 	}
 }
-function Accessory(type, x, y){
+function Accessory(num, type, x, y){
+	this.num = num;
+	this.type = type;
+	this.xPos = mouseX;
+	this.yPos = mouseY;
+	this.set = false;
 
+	if(this.type === "eye"){
+		this.image = eyes[this.num];
+	}
+	else{
+		this.image = mouths[this.num];
+	}
+	this.display = function(){
+		if(this.set){
+			image(this.image, this.xPos, this.yPos);
+		}
+		else{
+			image(this.image, mouseX, mouseY);
+			if(clicked){
+				set = true;
+				this.xPos = mouseX;
+				this.yPos = mouseY;
+			}
+		}
+	}
+}
+function AccessoryButton(img, x, y, type){
+	this.img = img;
+	this.xPos = x;
+	this.yPos = y;
+	this.type = type;
+
+	if()
 }
 function Button(name, img,x,y){
 	this.name = name;

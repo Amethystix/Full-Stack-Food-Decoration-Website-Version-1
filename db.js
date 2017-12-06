@@ -1,6 +1,7 @@
 //Make some schema stuff!
 // db.js
-var mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate');
+const mongoose = require('mongoose');
 //my schema goes here!
 const Accessory = new mongoose.Schema({
   xPos: Number, //number representing x coordinate of the accessory on the fruit image
@@ -15,7 +16,6 @@ const Food = new mongoose.Schema({
   user: String, //reference to a user object who created the fruit
   foodType: String, //type of fruit in the user's image
   accessories: [Accessory], //list of accessory objects
-  thumbnail: String //File name of the thumbnail of the user's created fruit (MAYBE)
 });
 const Testimonial = new mongoose.Schema({
   title: String, //Title of the testimonial
@@ -23,9 +23,16 @@ const Testimonial = new mongoose.Schema({
 	contents: String,
 	date: String //Date posted
 });
+const User = new mongoose.Schema({
+  googleId: String,
+  displayName: String,
+  images: [Food]
+});
+User.plugin(findOrCreate);
 mongoose.model('Accessory', Accessory);
 mongoose.model('Food', Food);
 mongoose.model('Testimonial', Testimonial);
+mongoose.model('User', User);
 
 let dbconf;
 if (process.env.NODE_ENV === 'PRODUCTION') {
