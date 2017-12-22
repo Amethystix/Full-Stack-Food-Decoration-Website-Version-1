@@ -1,12 +1,7 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(___TODO__: your project name_)
 
 # FoodFace Industries
 
 ## Overview
-
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
 
 FoodFace Industries is a revolutionary (well, not really) website where you can do the kind of thing you've always dreamed of.  That's right; I'm talking a full on user interactive fruit experience.  By interactive, I mean making beautiful fruit with customized features and faces.
 
@@ -88,8 +83,6 @@ Here's my sitemap
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
 3. as a user, I can create a new fruit painting
@@ -99,8 +92,6 @@ Here's my sitemap
 7. as a non-registered user, I can view the about page
 
 ## Research Topics
-
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
 
 * (2 points) Twitter Bootstrap
     * Use Twitter Bootstrap to make the website look pretty
@@ -122,8 +113,6 @@ Either 8 points out of the 8 required, or if vue.js is used, 13/8.
 Links to my skeleton app.js
 
 ## Annotations / References Used
-
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
 
 1. [google sign in api tutorial](https://developers.google.com/identity/sign-in/web/sign-in) - (add link to source code that was based on this)
 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code based off this)
